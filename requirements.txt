@@ -1,0 +1,10 @@
+scikit-learn
+pandas 
+matplotlib
+scipy
+joblib
+ace_tools
+XGBOOST
+kafka-python
+psycopg2-binary 
+
