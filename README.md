@@ -1,77 +1,75 @@
-# Taller 3: Aprendizaje Automático y Transmisión de Datos
+# Workshop 3: Machine Learning and Data Streaming
 
-## Resumen
+## Summary
 
-Este repositorio contiene la solución para el **Taller 3: Aprendizaje Automático y Transmisión de Datos**, un proyecto enfocado en construir un modelo de regresión para predecir puntajes de felicidad de diferentes países utilizando datos de cinco archivos CSV. 
+This repository contains the solution for **Workshop 3: Machine Learning and Data Streaming**, a project focused on building a regression model to predict happiness scores of different countries using data from five CSV files.
 
-La tarea incluye:
+The task includes:
 
-- Análisis Exploratorio de Datos (EDA)
-- Procesos ETL
-- Entrenamiento de modelo de regresión
-- Transmisión de datos con Kafka
-- Predicción y almacenamiento en base de datos
-- Evaluación del rendimiento del modelo
+* Exploratory Data Analysis (EDA)
+* ETL processes
+* Regression model training
+* Data streaming with Kafka
+* Prediction and database storage
+* Model performance evaluation
 
-Se usaron herramientas como Python, Jupyter Notebook, Scikit-learn, Apache Kafka y PostgreSQL
-
-
----
-
-## Detalles de la Implementación
-
-### EDA y ETL:
-
-- Análisis de CSV (valores faltantes, tipos de datos, distribuciones)
-- Selección de características por correlación y consistencia 
-- Preprocesamiento: codificación, escalado, imputación
-
-### Entrenamiento del Modelo:
-
-- División 80-20 con Scikit-learn
-- Modelos evaluados: Ridge, Random Forest, XGBoost, Lasso
-- Serialización del modelo con `.pkl`
-
-### Transmisión de Datos:
-
-- Uso de Apache Kafka
-- Productor envía datos transformados
-- Consumidor los recibe y manda a la db
-
-### Predicción y Almacenamiento:
-
-- Predicciones realizadas en el consumidor con el modelo `.pkl`
-- Almacenamiento en base de datos PostgreSQL
-
-### Evaluación del Modelo:
-
-- Métricas: MAE, RMSE, R²
+Tools used include Python, Jupyter Notebook, Scikit-learn, Apache Kafka, and PostgreSQL.
 
 ---
 
-## Selección del Modelo y Resultados
+## Implementation Details
 
-| Modelo        | MAE      | RMSE     | R²        | Notas                             |
-|---------------|----------|----------|-----------|-----------------------------------|
-| Ridge         | 0.003499 | 0.004596 | 0.999983  | Robusto, pero menos preciso       |
-| Random Forest | 0.008105 | 0.018131 | 0.999730  | Mejor rendimiento general         |
-| XGBoost       | 0.060757 | 0.083204 | 0.994309  | Buen rendimiento, más lento       |
-| Lasso         | 0.080578 | 0.096873 | 0.992285  | Modelo de referencia simple       |
+### EDA and ETL:
 
-**Modelo Seleccionado**: *Random Forest* por su rendimiento y precisión
+* CSV analysis (missing values, data types, distributions)
+* Feature selection based on correlation and consistency
+* Preprocessing: encoding, scaling, imputation
+
+### Model Training:
+
+* 80-20 split with Scikit-learn
+* Evaluated models: Ridge, Random Forest, XGBoost, Lasso
+* Model serialization with `.pkl`
+
+### Data Streaming:
+
+* Apache Kafka usage
+* Producer sends transformed data
+* Consumer receives and sends to the db
+
+### Prediction and Storage:
+
+* Predictions made in the consumer using the `.pkl` model
+* Storage in PostgreSQL database
+
+### Model Evaluation:
+
+* Metrics: MAE, RMSE, R²
 
 ---
 
-## Uso del Modelo
+## Model Selection and Results
 
-El modelo entrenado se serializa como `random_forest_model.pkl` y es utilizado por el consumidor Kafka para realizar predicciones en tiempo real. Los resultados se almacenan en PostgreSQL en la tabla `predicciones`.
+| Model         | MAE      | RMSE     | R²       | Notes                     |
+| ------------- | -------- | -------- | -------- | ------------------------- |
+| Ridge         | 0.003499 | 0.004596 | 0.999983 | Robust, but less accurate |
+| Random Forest | 0.008105 | 0.018131 | 0.999730 | Best overall performance  |
+| XGBoost       | 0.060757 | 0.083204 | 0.994309 | Good performance, slower  |
+| Lasso         | 0.080578 | 0.096873 | 0.992285 | Simple baseline model     |
+
+**Selected Model**: *Random Forest* for its performance and accuracy
 
 ---
 
-## Estructura de Carpetas
+## Model Usage
+
+The trained model is serialized as `random_forest_model.pkl` and used by the Kafka consumer to make real-time predictions. The results are stored in PostgreSQL in the `predicciones` table.
+
+---
+
+## Folder Structure
 
 ```
-
 Workshop\_03-Machine-learning-and-Data-streaming/
 ├── data/
 │   ├── happiness\_2015.csv
@@ -95,79 +93,80 @@ Workshop\_03-Machine-learning-and-Data-streaming/
 ├── docker-compose.yml
 ├── README.md
 ├── requirements.txt
-
-````
+```
 
 ---
 
-## Cómo Ejecutar el Proyecto
+## How to Run the Project
 
-### Requisitos Previos
+### Prerequisites
 
-- Docker instalado ([Guía de instalación](https://docs.docker.com/get-docker/))
-- Python 3 y dependencias instaladas:
+* Docker installed ([Installation guide](https://docs.docker.com/get-docker/))
+* Python 3 and dependencies installed:
 
 ```bash
 pip install -r requirements.txt
-````
+```
 
-### Pasos
+### Steps
 
-1. **Iniciar Kafka y Zookeeper**:
+1. **Start Kafka and Zookeeper**:
 
 ```bash
 docker-compose up
 ```
 
-2. **Ejecutar el Productor Kafka**:
+2. **Run the Kafka Producer**:
 
 ```bash
 cd KafkaETL
 python KafkaProducer.py
 ```
 
-3. **Ejecutar el Consumidor Kafka**:
+3. **Run the Kafka Consumer**:
 
 ```bash
 cd KafkaETL
 python KafkaConsumer.py
 ```
 
-4. **Ver Resultados**:
+4. **View Results**:
 
-* Consultar resultados en PostgreSQL o en la terminal 
-* Explorar `notebooks/eda_and_model_training.ipynb`
-* Revisar `pdf/demostracion.pdf`
-
----
-
-## Notas
-
-* Asegúrate de que Docker esté corriendo antes de iniciar Kafka.
-* Revisa los nombres del topic en `producer.py` y `consumer.py` (por defecto: `happiness_data`).
-* Puedes consultar la base de datos con herramientas como PostgreSQL -> pgAdmin4
+* Check results in PostgreSQL or in the terminal
+* Explore `notebooks/eda_and_model_training.ipynb`
+* Review `pdf/demostracion.pdf`
 
 ---
 
-## Tecnologías Utilizadas
+## Notes
 
-* **Python**: Desarrollo del pipeline
-* **Jupyter Notebook**: EDA y entrenamiento
-* **Scikit-learn**: Modelado
-* **Kafka**: Transmisión de datos
-* **PostgreSQL**: Almacenamiento
-* **Docker**: Infraestructura
-* **Archivos CSV**: Fuente de datos
+* Make sure Docker is running before starting Kafka.
+* Check topic names in `producer.py` and `consumer.py` (default: `happiness_data`).
+* You can query the database with tools like PostgreSQL -> pgAdmin4
 
 ---
 
-## Mejoras Futuras
+## Technologies Used
 
-* Ingeniería de características más avanzada
-* Búsqueda de hiperparámetros (grid search, random search)
+* **Python**: Pipeline development
+* **Jupyter Notebook**: EDA and training
+* **Scikit-learn**: Modeling
+* **Kafka**: Data streaming
+* **PostgreSQL**: Storage
+* **Docker**: Infrastructure
+* **CSV files**: Data source
 
 ---
 
-## Contacto
+## Future Improvements
 
-Para preguntas o comentarios, contacta a **Isabella Perez** en \[[isabellaperezcav@gmail.com](mailto:isabellaperezcav@gmail.com)].
+* More advanced feature engineering
+* Hyperparameter tuning (grid search, random search)
+
+---
+
+## Contact
+
+For questions or comments, contact **Isabella Perez** at \[[isabellaperezcav@gmail.com](mailto:isabellaperezcav@gmail.com)].
+
+---
