@@ -140,7 +140,7 @@ python KafkaConsumer.py
 ## Notes
 
 * Make sure Docker is running before starting Kafka.
-* Check topic names in `producer.py` and `consumer.py` (default: `happiness_data`).
+* Check topic names in `producer.py` and `consumer.py` (default: `happiness_topic`).
 * You can query the database with tools like PostgreSQL -> pgAdmin4
 
 ---
