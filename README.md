@@ -1,6 +1,5 @@
 # Workshop 3: Machine Learning and Data Streaming
 
-## Summary
 
 This repository contains the solution for **Workshop 3: Machine Learning and Data Streaming**, a project focused on building a regression model to predict happiness scores of different countries using data from five CSV files.
 
