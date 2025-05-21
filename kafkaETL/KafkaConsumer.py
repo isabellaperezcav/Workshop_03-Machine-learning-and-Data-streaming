@@ -89,7 +89,6 @@ def process_message(message):
         print(prediction)
 
         # Valor real y acierto
-        print(valor_real)
         try:
             valor_real = float(data.get("valor_real"))
             acierto = abs(valor_real - prediction) < 0.01
