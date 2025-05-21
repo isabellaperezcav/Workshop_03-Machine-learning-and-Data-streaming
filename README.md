@@ -133,7 +133,7 @@ python KafkaConsumer.py
 
 * Check results in PostgreSQL or in the terminal
 * Explore `notebooks/eda_and_model_training.ipynb`
-* Review `pdf/demostracion.pdf`
+* Review `pdf/work03_ETL_isabellaperezcav.mp4`
 
 ---
 
