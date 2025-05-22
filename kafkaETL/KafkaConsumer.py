@@ -17,13 +17,13 @@ DB_PORT = os.getenv("DB_PORT", "5432")
 
 
 model = joblib.load(
-    "C:/Users/ASUS/Desktop/workshop3ETL/models/random_forest_model.pkl"
+    "C:/Users/ASUS/Desktop/workshop3ETL/models/ridge_model.pkl"
 )
 
 features_path = (
     "C:/Users/ASUS/Desktop/workshop3ETL/models/features_selection.csv"
 )
-selected_features = pd.read_csv(features_path)["Feature"].tolist()
+selected_features = pd.read_csv(features_path)["feature"].tolist()
 
 
 conn = psycopg2.connect(
@@ -36,7 +36,7 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 
-boolean_features = [f for f in selected_features if f.startswith("Region_")]
+boolean_features = [f for f in selected_features if f.startswith("country_")]
 float_features = [f for f in selected_features if f not in boolean_features]
 
 feature_columns_sql = ",\n".join(
@@ -91,7 +91,7 @@ def process_message(message):
         # Valor real y acierto
         try:
             valor_real = float(data.get("valor_real"))
-            acierto = abs(valor_real - prediction) < 0.01
+            acierto = abs(valor_real - prediction) < 0.1
         except (TypeError, ValueError):
             valor_real, acierto = None, None
 

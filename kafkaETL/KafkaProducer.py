@@ -9,7 +9,7 @@ ruta_datos_limpios = r"C:/Users/ASUS/Desktop/workshop3ETL/models/df_clean.csv"
 ruta_datos_completos = r"C:/Users/ASUS/Desktop/workshop3ETL/data/df_combined.csv"
 
 
-features = pd.read_csv(ruta_features)["Feature"].tolist()
+features = pd.read_csv(ruta_features)["feature"].tolist()
 
 df_feat   = pd.read_csv(ruta_datos_limpios)    
 df_score  = pd.read_csv(ruta_datos_completos)  # contiene Happiness_Score para el valor real

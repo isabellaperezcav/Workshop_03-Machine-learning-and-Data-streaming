@@ -5,6 +5,7 @@ scipy
 joblib
 ace_tools
 XGBOOST
+lightgbm
 kafka-python
 psycopg2-binary 
 
