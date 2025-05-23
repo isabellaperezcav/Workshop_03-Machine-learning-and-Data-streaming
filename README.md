@@ -49,20 +49,22 @@ Tools used include Python, Jupyter Notebook, Scikit-learn, Apache Kafka, and Pos
 
 ## Model Selection and Results
 
-| Model         | MAE      | RMSE     | R²       | Notes                     |
-| ------------- | -------- | -------- | -------- | ------------------------- |
-| Ridge         | 0.003499 | 0.004596 | 0.999983 | Robust, but less accurate |
-| Random Forest | 0.008105 | 0.018131 | 0.999730 | Best overall performance  |
-| XGBoost       | 0.060757 | 0.083204 | 0.994309 | Good performance, slower  |
-| Lasso         | 0.080578 | 0.096873 | 0.992285 | Simple baseline model     |
+| Model         |    MAE   |   RMSE   |    R²     |
+|---------------|----------|----------|-----------|
+| Ridge         | 0.243188 | 0.315927 | 0.917945  |
+| XGBoost       | 0.309364 | 0.396228 | 0.870931  |
+| Random Forest | 0.350952 | 0.454441 | 0.830220  |
+| lightgbm      | 0.409087 | 0.519349 | 0.778257  |
+| Lasso         | 0.459663 | 0.585803 | 0.717880  |
 
-**Selected Model**: *Random Forest* for its performance and accuracy
+
+**Selected Model**: *Ridge* for its performance and accuracy
 
 ---
 
 ## Model Usage
 
-The trained model is serialized as `random_forest_model.pkl` and used by the Kafka consumer to make real-time predictions. The results are stored in PostgreSQL in the `predicciones` table.
+The trained model is serialized as `ridge_model.pkl` and used by the Kafka consumer to make real-time predictions. The results are stored in PostgreSQL in the `predicciones` table.
 
 ---
 
@@ -83,7 +85,7 @@ Workshop\_03-Machine-learning-and-Data-streaming/
 ├── notebooks/
 │   ├── eda\_and\_model\_training.ipynb
 ├── models/
-│   ├── random_forest_model.pkl
+│   ├── ridge_model.pkl
 │   ├── df_clean.csv
 │   ├── feautures_selection.csv
 ├── pdf/
@@ -132,7 +134,7 @@ python KafkaConsumer.py
 4. **View Results**:
 
 * Check results in PostgreSQL or in the terminal
-* Explore `notebooks/eda_and_model_training.ipynb`
+* Explore `notebooks/001_eda_modelTraining.ipynb`
 * Review `pdf/work03_ETL_isabellaperezcav.mp4`
 
 ---
